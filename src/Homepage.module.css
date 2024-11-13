@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+body {
+  font-family: 'Zen Dots', sans-serif;
+}
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+.centerGridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #27180D;
+  color: #FFF6D3;
+}
+
+
+/*List tab style and animation */
+.listStyle {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.line {
+  width: 0;
+  height: 2px;
+  background-color: #FFF6D3;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform-origin: left;
+  transition: width 0.3s ease-in-out;
+}
+
+.tabText {
+  margin: 5px;
+  color: #FFF6D3;
+  position: relative;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.listContainer:hover .tabText {
+  transform: translateX(50px);
+  color: #FFD388;
+  cursor: pointer;
+}
+
+.listContainer:hover .line {
+  width: 40px;
+  background-color: #FFD388;
+  cursor: pointer;
+}
+
+/* Smooth return to original position when mouse leaves */
+.listContainer .tabText {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* left side */
+.leftContainer{
+  margin:20px;
+}
+
+/* right side */
+.rightContainer {
+  margin: 20px;
+}
+
+.rightExperienceContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
