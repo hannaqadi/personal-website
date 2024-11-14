@@ -9,13 +9,15 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   height: 100vh;
   width: 100vw;
+  /* background-color: #27180D; */
 }
-
 .centerGridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #27180D;
   color: #FFF6D3;
+  height: 100%; /* Take full height within its container */
+  overflow: hidden; /* Prevent scrolling on the main center container */
 }
 
 
@@ -72,14 +74,41 @@ body {
 /* left side */
 .leftContainer{
   margin:20px;
+  position: relative;
+}
+
+.bottomRightIcons{
+  position: absolute;
+  bottom:10px;
+  right: 10px;
 }
 
 /* right side */
 .rightContainer {
-  margin: 20px;
+  padding: 0px 20px 20px 20px;
+  background-color: #FFD388;
+  height: 100%;
+  overflow-y: auto;
+}
+.rightContainer::-webkit-scrollbar{
+  display: none;
 }
 
 .rightExperienceContainer {
   display: grid;
   grid-template-columns: 1fr 3fr;
+}
+
+.skillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill {
+  background-color: #27180D;
+  color: #FFD388;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 5px 0; 
 }
