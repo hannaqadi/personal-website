@@ -21,7 +21,14 @@ const Homepage = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <div> left</div>
+      <div>
+      <div className={styles.verticalMarqueeContainer}>
+      <div className={styles.verticalMarqueeContent}>
+        <p className={styles.rotatedText}>This is your vertical scrolling text. Add as many items as you'd like!</p>
+        
+      </div>
+    </div>
+      </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
           <h1>Hanna Qadi</h1>
