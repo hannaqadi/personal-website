@@ -9,7 +9,7 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   height: 100vh;
   width: 100vw;
-  /* background-color: #27180D; */
+  background-color: #27180D;
 }
 
 .centerGridContainer {
@@ -22,50 +22,15 @@ body {
 }
 
 /*Outer left side */
-
-/* Vertical Marquee */
-.verticalMarqueeContainer {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.verticalMarqueeContent {
-  color: #350C00;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  bottom: 300px;
-  right: -300px;
-  animation: vertical-scroll 1s linear infinite;
-}
-
-.verticalMarqueeContent p {
-  margin: 0;
-  padding: 10px 0;
-  text-align: center;
-}
+/* For Marquee */
 
 .rotatedText {
   display: inline-block;
   white-space: nowrap;
   margin: 0;
   transform: rotate(-90deg);
-  /* Rotate each letter 90 degrees to the side */
   transform-origin: center;
-}
-
-@keyframes vertical-scroll {
-  0% {
-    transform: translateY(100%); /* Start below the container */
-  }
-  50% {
-    transform: translateY(0); /* Move to the middle of the container */
-  }
-  100% {
-    transform: translateY(-100%); /* Move above the container */
-  }
+  color: #FFF6D3;
 }
 
 /* inner left side */
