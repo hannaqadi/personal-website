@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
 
-import Marquee from "react-fast-marquee";
-
+// import Marquee from "react-fast-marquee";
+// import { Marquee } from "@devnomic/marquee";
+// import Marquee from "./Marquee"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -23,11 +24,9 @@ const Homepage = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <div>
-          <Marquee style={{position: "absolute", height: "100vh"}} speed={20} direction='up'>
-            <div className={styles.rotatedText}>Now Playing: Pianomagic by Bobby Lyle</div>
-          </Marquee>
-      </div>
+      <div className={styles.outerLeftContainer}>
+          <marquee direction="up" className={styles.marquee}> Now Playing: Nocturnal Drive by James 'PJ' Spraggins</marquee>
+        </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
           <h1>Hanna Qadi</h1>

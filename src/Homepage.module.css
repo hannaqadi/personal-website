@@ -22,7 +22,89 @@ body {
 }
 
 /*Outer left side */
-/* For Marquee */
+.outerLeftContainer {
+  display: flex;
+  justify-content: flex-end; /* Align the marquee to the right */
+  align-items: center;       /* Vertically center the marquee */
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.marquee{
+  height: 100vh;             /* Fixed height for the marquee */
+  width: 100%;              /* This will be updated dynamically via JS */
+  writing-mode: vertical-rl;
+  color:#FFF6D3;
+}
+
+.marqueeContainer {
+  height: 100vh;             /* Fixed height for the marquee */
+  width: 100%;              /* This will be updated dynamically via JS */
+  transform: rotate(-90deg); /* Rotate to vertical */
+  transform-origin: right top; /* Keep rotation predictable */
+  overflow: hidden;
+  position: relative;        /* Keep within the layout */
+  color: #FFF6D3;
+}
+
+.marqueeContent {
+  display: block;
+  width: 100vh;             /* Set width for looping animation */
+  height: 25px;            /* Match the container height */
+  position: absolute;
+  animation: marquee 15s linear infinite;
+}
+
+.marqueeContent span {
+  float: left;             /* Ensure text aligns horizontally */
+  width: 50%;              /* Half the width for smooth looping */
+  white-space: nowrap;     /* Prevent wrapping */
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 
+.outerLeftContainer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+} 
+
+.marqueeContainer {
+  height: 25px;
+  width: 100%;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  overflow: hidden;
+  color:#FFF6D3;
+}
+
+.marqueeContent span {
+  float:right;
+  width: 50%;
+}
+
+.marqueeContent{
+  display: block;
+  width: 200%;
+  height: 30px;
+  position: absolute;
+  overflow: hidden;
+  animation: marquee 15s linear infinite;
+}
+
+
+@keyframes marquee {
+  0% { right: 0; }
+  100% { right: -100%; }
+} */
+
 
 .rotatedText {
   display: inline-block;
@@ -32,6 +114,14 @@ body {
   transform-origin: center;
   color: #FFF6D3;
 }
+/* .rotatedText {
+  height: 100vh;
+  width:100%;
+  margin: 0;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  color: #FFF6D3;
+} */
 
 /* inner left side */
 .leftContainer {
