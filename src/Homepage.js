@@ -16,16 +16,76 @@ import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 const Homepage = () => {
+  const [isAudioReady, setIsAudioReady] = useState(false)
   const [showVolume, setShowVolume] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isMuted, setIsMuted] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  const handleVolume = () => {
+  const audioRef = useRef(null)
+  const aboutSection = useRef(null)
+  const experienceSection = useRef(null)
+
+  const playlist =[
+    {title: 'Now Playing: You read my mind by David Benoit', src: "./you_read_my_mind.mp3"}
+  ]
+
+  const handleSkip = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % playlist.length);
+    setIsPlaying(false);
+  };
+
+  const handleVolumeIcon = () => {
     setShowVolume(prevState => !prevState)
   }
+  const playPause = () => {
+    setIsPlaying(prevState => !prevState);
+  };
 
-  return (
+  useEffect(() => {
+    if (audioRef.current) { // if audio component has been mounted
+      // play or pause the audio
+      if (!isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
+  }, [isPlaying]);
+
+  // const handlePlayPause = () => {
+  //   if (audioRef.current) {
+  //     if (isPlaying) {
+  //       audioRef.current.pause();
+  //     } else {
+  //       audioRef.current.play();
+  //     }
+  //     setIsPlaying(!isPlaying);
+  //   }
+  // };
+ 
+
+  const handleIconMutePlay = () =>{
+    handleVolumeIcon()
+    playPause()
+    // handlePlayPause()
+  }
+
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return ( 
     <div className={styles.mainContainer}>
+        <audio
+        ref={audioRef}
+        src={playlist[currentIndex].src}
+        muted={isMuted}
+        onEnded={handleSkip} 
+        controls={true}
+      />
       <div className={styles.outerLeftContainer}>
-          <marquee direction="up" className={styles.marquee}> Now Playing: Nocturnal Drive by James 'PJ' Spraggins</marquee>
+          <marquee direction="up" className={styles.marquee}> {playlist[currentIndex].title} </marquee>
         </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
@@ -34,13 +94,13 @@ const Homepage = () => {
           <h3>I build accessible, pixel perfect digital experiences for the web and mobile devices.</h3>
           <ul className={styles.listStyle}>
             <li>
-              <div className={styles.listContainer}>
+              <div className={styles.listContainer} onClick={()=> scrollToSection(aboutSection) }>
                 <div className={styles.line}></div>
                 <h4 className={styles.tabText}>About</h4>
               </div>
             </li>
             <li>
-              <div className={styles.listContainer}>
+              <div className={styles.listContainer} onClick={()=> scrollToSection(experienceSection) }>
                 <div className={styles.line}></div>
                 <h4 className={styles.tabText}>Experience</h4>
               </div>
@@ -65,17 +125,16 @@ const Homepage = () => {
           <div className={styles.bottomRightIcons}>
             <FontAwesomeIcon icon={faUniversalAccess} />
             <FontAwesomeIcon icon={faForward} />
-            {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleVolume} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleVolume} />}
-
+            {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconMutePlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconMutePlay} />}
           </div>
         </div>
         <div className={styles.rightContainer}>
-          <div className={styles.rightContainerGrid}>
+          <div className={styles.rightContainerGrid} ref={aboutSection}>
             <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. <br></br>
               <br></br> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
               <br></br> <br></br> Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
             </p>
-            <div className={styles.rightExperienceContainer}>
+            <div className={styles.rightExperienceContainer} ref={experienceSection}>
               <p> 2024 2024</p>
               <div>
                 <p>Mesmo - Frontend Developer
