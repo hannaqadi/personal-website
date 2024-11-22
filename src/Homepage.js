@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
-
+import sound from './you_read_my_mind.mp3'
 // import Marquee from "react-fast-marquee";
 // import { Marquee } from "@devnomic/marquee";
 // import Marquee from "./Marquee"
@@ -16,18 +16,28 @@ import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 const Homepage = () => {
-  const [isAudioReady, setIsAudioReady] = useState(false)
   const [showVolume, setShowVolume] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  console.log(isMobile)
   const audioRef = useRef(null)
   const aboutSection = useRef(null)
   const experienceSection = useRef(null)
 
-  const playlist =[
-    {title: 'Now Playing: You read my mind by David Benoit', src: "./you_read_my_mind.mp3"}
+
+  const playlist = [
+    { title: 'Now Playing: You read my mind by David Benoit', src: "./you_read_my_mind.mp3" }
   ]
 
   const handleSkip = () => {
@@ -38,90 +48,90 @@ const Homepage = () => {
   const handleVolumeIcon = () => {
     setShowVolume(prevState => !prevState)
   }
+
   const playPause = () => {
     setIsPlaying(prevState => !prevState);
   };
 
   useEffect(() => {
-    if (audioRef.current) { // if audio component has been mounted
-      // play or pause the audio
-      if (!isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
+    if (audioRef.current) {
+      const playAudio = async () => {
+        try {
+          if (isPlaying) {
+            await audioRef.current.play();
+          } else {
+            audioRef.current.pause();
+          }
+        } catch (error) {
+          console.error("Audio playback failed:", error);
+        }
+      };
+
+      playAudio();
     }
   }, [isPlaying]);
 
-  // const handlePlayPause = () => {
-  //   if (audioRef.current) {
-  //     if (isPlaying) {
-  //       audioRef.current.pause();
-  //     } else {
-  //       audioRef.current.play();
-  //     }
-  //     setIsPlaying(!isPlaying);
-  //   }
-  // };
- 
-
-  const handleIconMutePlay = () =>{
+  const handleIconMutePlay = () => {
     handleVolumeIcon()
     playPause()
-    // handlePlayPause()
   }
 
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return ( 
+  return (
     <div className={styles.mainContainer}>
-        <audio
+      <audio
         ref={audioRef}
-        src={playlist[currentIndex].src}
-        muted={isMuted}
-        onEnded={handleSkip} 
-        controls={true}
+        onEnded={handleSkip}
+        controls={false}
+        src={sound}
       />
       <div className={styles.outerLeftContainer}>
-          <marquee direction="up" className={styles.marquee}> {playlist[currentIndex].title} </marquee>
-        </div>
+        <marquee direction="up" className={styles.marquee}> {playlist[currentIndex].title} </marquee>
+      </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
-          <h1>Hanna Qadi</h1>
-          <h2>Frontend Engineer</h2>
-          <h3>I build accessible, pixel perfect digital experiences for the web and mobile devices.</h3>
-          <ul className={styles.listStyle}>
-            <li>
-              <div className={styles.listContainer} onClick={()=> scrollToSection(aboutSection) }>
-                <div className={styles.line}></div>
-                <h4 className={styles.tabText}>About</h4>
-              </div>
-            </li>
-            <li>
-              <div className={styles.listContainer} onClick={()=> scrollToSection(experienceSection) }>
-                <div className={styles.line}></div>
-                <h4 className={styles.tabText}>Experience</h4>
-              </div>
-            </li>
-            <li>
-              <div className={styles.listContainer}>
-                <div className={styles.line}></div>
-                <h4 className={styles.tabText}>Projects</h4>
-              </div>
-            </li>
-            <li>
-              <div className={styles.listContainer}>
-                <div className={styles.line}></div>
-                <h4 className={styles.tabText}>Contact</h4>
-              </div>
-            </li>
-          </ul>
-          <FontAwesomeIcon icon={faGithub} />
-          <FontAwesomeIcon icon={faLinkedin} />
-          <FontAwesomeIcon icon={faCodepen} />
-          <FontAwesomeIcon icon={faGoodreads} />
+          <div>
+            <h1>Hanna Qadi</h1>
+            <h2>Frontend Engineer</h2>
+            <h3>I build accessible, pixel perfect digital experiences for the web and mobile devices.</h3>
+          </div>
+          {!isMobile ?
+            <ul className={styles.listStyle}>
+              <li>
+                <div className={styles.listContainer} onClick={() => scrollToSection(aboutSection)}>
+                  <div className={styles.line}></div>
+                  <h4 className={styles.tabText}>About</h4>
+                </div>
+              </li>
+              <li>
+                <div className={styles.listContainer} onClick={() => scrollToSection(experienceSection)}>
+                  <div className={styles.line}></div>
+                  <h4 className={styles.tabText}>Experience</h4>
+                </div>
+              </li>
+              <li>
+                <div className={styles.listContainer}>
+                  <div className={styles.line}></div>
+                  <h4 className={styles.tabText}>Projects</h4>
+                </div>
+              </li>
+              <li>
+                <div className={styles.listContainer}>
+                  <div className={styles.line}></div>
+                  <h4 className={styles.tabText}>Contact</h4>
+                </div>
+              </li>
+            </ul>
+            : <></>}
+          <div>
+            <FontAwesomeIcon icon={faGithub} />
+            <FontAwesomeIcon icon={faLinkedin} />
+            <FontAwesomeIcon icon={faCodepen} />
+            <FontAwesomeIcon icon={faGoodreads} />
+          </div>
           <div className={styles.bottomRightIcons}>
             <FontAwesomeIcon icon={faUniversalAccess} />
             <FontAwesomeIcon icon={faForward} />
@@ -130,10 +140,12 @@ const Homepage = () => {
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.rightContainerGrid} ref={aboutSection}>
+            {isMobile ? <h3>About</h3> : <></>}
             <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. <br></br>
               <br></br> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
               <br></br> <br></br> Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
             </p>
+            {isMobile ? <h3>Experience</h3> : <></>}
             <div className={styles.rightExperienceContainer} ref={experienceSection}>
               <p> 2024 2024</p>
               <div>
@@ -179,7 +191,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-      <div>right</div>
+      <div className={styles.outerRightContainer}>right</div>
     </div>
   )
 }
