@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
 import sound from './you_read_my_mind.mp3'
+import picture from './picture.jpg'
 // import Marquee from "react-fast-marquee";
 // import { Marquee } from "@devnomic/marquee";
 // import Marquee from "./Marquee"
@@ -93,7 +94,7 @@ const Homepage = () => {
       </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
-          <div>
+          <div className={styles.title}>
             <h1>Hanna Qadi</h1>
             <h2>Frontend Engineer</h2>
             <h3>I build accessible, pixel perfect digital experiences for the web and mobile devices.</h3>
@@ -126,12 +127,18 @@ const Homepage = () => {
               </li>
             </ul>
             : <></>}
-          <div>
+          <div className={styles.imageContainer}>
+            <div className={styles.orangeTint}>
+            </div>
+            <img src={picture} className={styles.image}></img>
+          </div>
+          <div className={styles.socials}>
             <FontAwesomeIcon icon={faGithub} />
             <FontAwesomeIcon icon={faLinkedin} />
             <FontAwesomeIcon icon={faCodepen} />
             <FontAwesomeIcon icon={faGoodreads} />
           </div>
+
           <div className={styles.bottomRightIcons}>
             <FontAwesomeIcon icon={faUniversalAccess} />
             <FontAwesomeIcon icon={faForward} />
