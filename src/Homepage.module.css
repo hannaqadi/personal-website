@@ -109,20 +109,21 @@ body::before {
   transition: transform 0.3s ease-in-out;
 }
 
-.listContainer:hover .tabText {
+.tabText:hover {
   transform: translateX(50px);
   color: #FFD388;
   cursor: pointer;
 }
 
-.listContainer:hover .line {
+/* Ensure only the line associated with the hovered text animates */
+.tabText:hover + .line {
   width: 40px;
   background-color: #FFD388;
   cursor: pointer;
 }
 
 /* Smooth return to original position when mouse leaves */
-.listContainer .tabText {
+.tabText {
   transition: transform 0.3s ease-in-out;
 }
 

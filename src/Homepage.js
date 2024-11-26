@@ -93,26 +93,27 @@ const Homepage = () => {
             <ul className={styles.listStyle}>
               <li>
                 <div className={styles.listContainer} onClick={() => scrollToSection(aboutSection)}>
-                  <div className={styles.line}></div>
                   <h4 className={styles.tabText}>About</h4>
+                  <div className={styles.line}></div>
+
                 </div>
               </li>
               <li>
                 <div className={styles.listContainer} onClick={() => scrollToSection(experienceSection)}>
-                  <div className={styles.line}></div>
                   <h4 className={styles.tabText}>Experience</h4>
+                  <div className={styles.line}></div>
                 </div>
               </li>
               <li>
                 <div className={styles.listContainer}>
-                  <div className={styles.line}></div>
                   <h4 className={styles.tabText}>Projects</h4>
+                  <div className={styles.line}></div>
                 </div>
               </li>
               <li>
                 <div className={styles.listContainer}>
-                  <div className={styles.line}></div>
                   <h4 className={styles.tabText}>Contact</h4>
+                  <div className={styles.line}></div>
                 </div>
               </li>
             </ul>
@@ -134,9 +135,9 @@ const Homepage = () => {
           <div className={styles.bottomRightIcons}>
             <FontAwesomeIcon icon={faUniversalAccess} />
             {!isMobile ?
-            <> {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconMutePlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconMutePlay} />} </>
-           : <></> }
-            </div>
+              <> {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconMutePlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconMutePlay} />} </>
+              : <></>}
+          </div>
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.rightContainerGrid} ref={aboutSection}>
