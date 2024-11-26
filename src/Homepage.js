@@ -18,7 +18,10 @@ const Homepage = () => {
   const [showVolume, setShowVolume] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1080);
-
+  document.addEventListener('mousemove', (e) => {
+    document.body.style.setProperty('--mouse-x', e.clientX);
+    document.body.style.setProperty('--mouse-y', e.clientY);
+  });
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1080);
