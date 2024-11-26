@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
 import sound from './you_read_my_mind.mp3'
-import picture from './picture.jpg'
 // import Marquee from "react-fast-marquee";
 // import { Marquee } from "@devnomic/marquee";
-// import Marquee from "./Marquee"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -18,13 +16,12 @@ import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Homepage = () => {
   const [showVolume, setShowVolume] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1080);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1080);
     };
 
     window.addEventListener("resize", handleResize);
@@ -36,15 +33,6 @@ const Homepage = () => {
   const aboutSection = useRef(null)
   const experienceSection = useRef(null)
 
-
-  const playlist = [
-    { title: 'Now Playing: You read my mind by David Benoit', src: "./you_read_my_mind.mp3" }
-  ]
-
-  const handleSkip = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % playlist.length);
-    setIsPlaying(false);
-  };
 
   const handleVolumeIcon = () => {
     setShowVolume(prevState => !prevState)
@@ -85,12 +73,11 @@ const Homepage = () => {
     <div className={styles.mainContainer}>
       <audio
         ref={audioRef}
-        onEnded={handleSkip}
         controls={false}
         src={sound}
       />
       <div className={styles.outerLeftContainer}>
-        <marquee direction="up" className={styles.marquee}> {playlist[currentIndex].title} </marquee>
+        <marquee direction="up" className={styles.marquee}>Now Playing: You read my mind by David Benoit</marquee>
       </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
@@ -127,23 +114,26 @@ const Homepage = () => {
               </li>
             </ul>
             : <></>}
-          <div className={styles.imageContainer}>
-            <div className={styles.orangeTint}>
-            </div>
-            <img src={picture} className={styles.image}></img>
-          </div>
           <div className={styles.socials}>
-            <FontAwesomeIcon icon={faGithub} />
-            <FontAwesomeIcon icon={faLinkedin} />
-            <FontAwesomeIcon icon={faCodepen} />
-            <FontAwesomeIcon icon={faGoodreads} />
+            <a href="https://github.com/hxnoons">
+              <FontAwesomeIcon icon={faGithub} />
+            </a>
+            <a href="https://www.linkedin.com/in/hannaabdulalim/">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+            <a href="https://codepen.io/hxnoons">
+              <FontAwesomeIcon icon={faCodepen} />
+            </a>
+            <a href="https://www.goodreads.com/user/show/156277793-hanna">
+              <FontAwesomeIcon icon={faGoodreads} />
+            </a>
           </div>
-
           <div className={styles.bottomRightIcons}>
             <FontAwesomeIcon icon={faUniversalAccess} />
-            <FontAwesomeIcon icon={faForward} />
-            {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconMutePlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconMutePlay} />}
-          </div>
+            {!isMobile ?
+            <> {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconMutePlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconMutePlay} />} </>
+           : <></> }
+            </div>
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.rightContainerGrid} ref={aboutSection}>
@@ -194,11 +184,10 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
-      <div className={styles.outerRightContainer}>right</div>
+      <div className={styles.outerRightContainer}></div>
     </div>
   )
 }

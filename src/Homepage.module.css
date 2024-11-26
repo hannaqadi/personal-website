@@ -4,9 +4,7 @@ body {
   font-family: 'Zen Dots', sans-serif;
 }
 
-h1 h2 h3 {
-  font-style: none;
-}
+
 
 .mainContainer {
   display: grid;
@@ -44,22 +42,15 @@ h1 h2 h3 {
 
 /* inner left side */
 .leftContainer {
-  margin: 20px;
+  margin: 90px 20px 20px 20px;
   position: relative;
   display: grid;
   grid-template-rows: 0.5fr 0.4fr 0.8fr 1fr;
 }
 
-.bottomRightIcons {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+.title * {
+  font-weight: normal;
 }
-
-.bottomRightIcons * {
-  padding: 10px 10px 0px 10px
-}
-
 
 /*List tab style and animation */
 .listStyle {
@@ -87,6 +78,7 @@ h1 h2 h3 {
 }
 
 .tabText {
+  font-weight: normal;
   margin: 5px;
   color: #FFF6D3;
   position: relative;
@@ -115,13 +107,15 @@ h1 h2 h3 {
   position: relative;
   display: inline-block;
   aspect-ratio: 16/9;
-  overflow:hidden;
+  overflow: hidden;
   width: 100%;
 }
-.image{
-  width: 100%; 
+
+.image {
+  width: 100%;
   height: 100%;
 }
+
 .orangeTint {
   position: absolute;
   background-color: rgba(227, 163, 79, 0.4);
@@ -131,14 +125,41 @@ h1 h2 h3 {
 
 .socials {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-top: 10px;
-  color:  rgba(227, 163, 79, 0.8);
+  color: #FFF6D3;
+  margin-left: -5px;
 }
+
 .socials * {
-  height:30px;
-  width:30px;
-  padding:5px;
+  height: 26px;
+  width: 26px;
+  padding: 0px 5px 0px 5px;
+}
+
+.socials :hover {
+  color: #FFD388;
+  cursor: pointer;
+}
+
+.socials a:visited {
+  color: #FFF6D3;
+}
+
+.bottomRightIcons {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  margin-left: -5px;
+}
+
+.bottomRightIcons * {
+  padding: 10px 10px 0px 10px
+}
+
+.bottomRightIcons svg:hover {
+  color: #FFD388;
+  cursor: pointer;
 }
 
 /* right side */
@@ -150,6 +171,7 @@ h1 h2 h3 {
   height: 100%;
   overflow-y: auto;
   color: #350C00;
+  font-size: 0.9em;
 }
 
 .rightContainer::-webkit-scrollbar {
@@ -157,8 +179,8 @@ h1 h2 h3 {
 }
 
 .rightContainerGrid {
-  padding: 0px 20px 20px 20px;
   display: grid;
+  padding: 90px 20px 20px 20px;
   grid-template-rows: auto;
   background-color: rgba(227, 163, 79, 0.8);
 }
@@ -180,23 +202,14 @@ h1 h2 h3 {
   border-radius: 8px;
   padding: 5px 10px;
   margin: 5px 0;
+  font-size: 0.9em;
 }
 
 
 /* Phone Sizing */
 
-@media (max-width: 1500px) {
-  .mainContainer {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    height: 100vh;
-    width: 100vw;
-    background-color: #27180D;
-  }
 
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .mainContainer {
     display: grid;
     grid-template-columns: 1fr;
@@ -227,25 +240,47 @@ h1 h2 h3 {
 
   .leftContainer {
     display: flex;
-    font-size: clamp(2vw, 2vw, 3vw);
-    margin: 20px;
+    font-size: 1em;
+    margin: 5px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 10vh;
+    height: 100%;
     width: 100%;
   }
 
   .title {
+    font-size: 0.7em;
     padding: 0px 30px 0px 20px;
   }
 
+  .title * {
+    padding: 5px;
+    margin: 0px;
+  }
+
+  .socials {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+    color: #FFF6D3;
+    margin-left: 15px;
+  }
+
+  .socials * {
+    height: 1.3em;
+    width: 1.3em;
+    padding: 0px 5px 0px 5px;
+  }
+
   .bottomRightIcons {
-    position: relative;
-    margin: 10px
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin-left: -5px;
   }
 
   .bottomRightIcons * {
-    padding: 0px;
+    padding: 10px 10px 0px 10px
   }
 
   .listStyle {
