@@ -9,11 +9,14 @@ body::before {
   content: '';
   position: fixed;
   box-shadow: 0 0 150px 100px rgba(255, 81, 0, 0.342);
-  pointer-events: none; /* Prevent the pseudo-element from blocking interactions */
-  mix-blend-mode: screen; /* Optional for enhanced glow effects */
+  pointer-events: none;
+  /* Prevent the pseudo-element from blocking interactions */
+  mix-blend-mode: screen;
+  /* Optional for enhanced glow effects */
   z-index: 9999;
   transform: translate(-50%, -50%);
-  will-change: transform; /* Optimize performance for smooth movement */
+  will-change: transform;
+  /* Optimize performance for smooth movement */
 }
 
 /* Track the cursor position */
@@ -23,10 +26,8 @@ body {
 }
 
 body::before {
-  transform: translate(
-    calc(var(--mouse-x) * 1px - 25px),
-    calc(var(--mouse-y) * 1px - 25px)
-  );
+  transform: translate(calc(var(--mouse-x) * 1px - 25px),
+      calc(var(--mouse-y) * 1px - 25px));
 }
 
 .mainContainer {
@@ -65,10 +66,18 @@ body::before {
 
 /* inner left side */
 .leftContainer {
-  margin: 90px 20px 20px 20px;
+  position: relative;
+  margin: 0px 20px 20px 20px;
   position: relative;
   display: grid;
-  grid-template-rows: 0.5fr 0.4fr 0.8fr 1fr;
+  height: 100%;
+  grid-template-rows: 0.9fr 0.4fr 0.8fr 1fr;
+}
+
+.title {
+  position: relative;
+  align-content: flex-end;
+
 }
 
 .title * {
@@ -116,7 +125,7 @@ body::before {
 }
 
 /* Ensure only the line associated with the hovered text animates */
-.tabText:hover + .line {
+.tabText:hover+.line {
   width: 40px;
   background-color: #FFD388;
   cursor: pointer;
@@ -125,26 +134,6 @@ body::before {
 /* Smooth return to original position when mouse leaves */
 .tabText {
   transition: transform 0.3s ease-in-out;
-}
-
-.imageContainer {
-  position: relative;
-  display: inline-block;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  width: 100%;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-}
-
-.orangeTint {
-  position: absolute;
-  background-color: rgba(227, 163, 79, 0.4);
-  height: 100%;
-  width: 100%;
 }
 
 .socials {
@@ -240,8 +229,9 @@ body::before {
     height: 100vh;
     width: 100vw;
     background-color: #27180D;
-
+    overflow: hidden;
   }
+
 
   .outerLeftContainer {
     display: none;
@@ -253,25 +243,38 @@ body::before {
 
   .centerGridContainer {
     display: grid;
-    grid-template-rows: 1fr 3fr;
+    grid-template-rows: 20vh 3fr;
     grid-template-columns: 1fr;
     background-color: #27180D;
     color: #FFF6D3;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    height: 100%;
+    overflow-y: auto;
+    position:relative;
+  }
+
+  .centerGridContainer::-webkit-scrollbar {
+    width:12px;
   }
 
   .leftContainer {
-    display: flex;
     font-size: 1em;
     margin: 5px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 100%;
+    height: auto;
     width: 100%;
   }
 
+  .rightContainer {
+    background-image: url("./berkeley_sunset.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 90%;
+    height: auto;
+    color: #350C00;
+    font-size: 0.9em;
+  }
+  
   .title {
     font-size: 0.7em;
     padding: 0px 30px 0px 20px;
@@ -309,6 +312,23 @@ body::before {
 
   .listStyle {
     display: block;
+  }
+
+  
+  .rightContainerGrid {
+    display: grid;
+    margin:0px;
+    padding: 0px 20px 0px 20px;
+    grid-template-rows: auto;
+    background-color: rgba(227, 163, 79, 0.8);
+  }
+
+  .headersMobile{
+    font-weight: normal;
+    margin-top:10px;
+    margin-bottom: 0px;
+    padding:0px;
+    font-size: 1.3em;
   }
 
 }
