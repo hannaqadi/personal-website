@@ -220,18 +220,15 @@ body::before {
 
 
 /* Phone Sizing */
-
-
 @media (max-width: 1080px) {
   .mainContainer {
     display: grid;
     grid-template-columns: 1fr;
-    height: 100vh;
+    height: auto;
     width: 100vw;
     background-color: #27180D;
-    overflow: hidden;
+    overflow: auto;
   }
-
 
   .outerLeftContainer {
     display: none;
