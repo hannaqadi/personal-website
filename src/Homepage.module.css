@@ -4,22 +4,18 @@ body {
   font-family: 'Zen Dots', sans-serif;
 }
 
-
+/*Mouse glow effect */
 body::before {
   content: '';
   position: fixed;
   box-shadow: 0 0 150px 100px rgba(255, 81, 0, 0.342);
   pointer-events: none;
-  /* Prevent the pseudo-element from blocking interactions */
   mix-blend-mode: screen;
-  /* Optional for enhanced glow effects */
-  z-index: 9999;
+  z-index: 5;
   transform: translate(-50%, -50%);
   will-change: transform;
-  /* Optimize performance for smooth movement */
 }
 
-/* Track the cursor position */
 body {
   --mouse-x: 0;
   --mouse-y: 0;
@@ -30,12 +26,14 @@ body::before {
       calc(var(--mouse-y) * 1px - 25px));
 }
 
+/*main*/
 .mainContainer {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr minmax(1000px, 2fr) 1fr;
   height: 100vh;
   width: 100vw;
   background-color: #27180D;
+  overflow:hidden;
 }
 
 .centerGridContainer {
@@ -64,13 +62,13 @@ body::before {
   color: #FFF6D3;
 }
 
-/* inner left side */
+/*Inner left side */
 .leftContainer {
   position: relative;
   margin: 0px 20px 20px 20px;
   position: relative;
   display: grid;
-  height: 100%;
+  height: 100vh;
   grid-template-rows: 0.9fr 0.4fr 0.8fr 1fr;
 }
 
@@ -175,7 +173,7 @@ body::before {
   cursor: pointer;
 }
 
-/* right side */
+/*Inner Right side */
 .rightContainer {
   background-image: url("./berkeley_sunset.jpg");
   background-repeat: no-repeat;
@@ -193,14 +191,17 @@ body::before {
 
 .rightContainerGrid {
   display: grid;
-  padding: 90px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   grid-template-rows: auto;
   background-color: rgba(227, 163, 79, 0.8);
 }
 
-.rightExperienceContainer {
+.experienceContainer {
   display: grid;
   grid-template-columns: 1fr 3fr;
+}
+.experienceWrapper{
+  display: contents;
 }
 
 .skillsContainer {
@@ -240,13 +241,12 @@ body::before {
 
   .centerGridContainer {
     display: grid;
-    grid-template-rows: 20vh 3fr;
+    grid-template-rows: 0.2fr 3fr;
     grid-template-columns: 1fr;
     background-color: #27180D;
     color: #FFF6D3;
     height: 100%;
     overflow-y: auto;
-    position:relative;
   }
 
   .centerGridContainer::-webkit-scrollbar {
@@ -257,7 +257,7 @@ body::before {
     font-size: 1em;
     margin: 5px;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 0.4fr;
     height: auto;
     width: 100%;
   }
@@ -283,8 +283,6 @@ body::before {
   }
 
   .socials {
-    display: flex;
-    justify-content: flex-start;
     margin-top: 10px;
     color: #FFF6D3;
     margin-left: 15px;
