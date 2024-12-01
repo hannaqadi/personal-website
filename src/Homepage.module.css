@@ -8,7 +8,7 @@ body {
 body::before {
   content: '';
   position: fixed;
-  box-shadow: 0 0 150px 100px rgba(255, 81, 0, 0.342);
+  box-shadow: 0 0 200px 200px rgba(255, 81, 0, 0.05);
   pointer-events: none;
   mix-blend-mode: screen;
   z-index: 5;
@@ -22,8 +22,8 @@ body {
 }
 
 body::before {
-  transform: translate(calc(var(--mouse-x) * 1px - 25px),
-      calc(var(--mouse-y) * 1px - 25px));
+  transform: translate(calc(var(--mouse-x) * 1px - 5px),
+      calc(var(--mouse-y) * 1px - 5px));
 }
 
 /*main*/

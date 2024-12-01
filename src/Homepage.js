@@ -11,6 +11,7 @@ import { faGoodreads } from '@fortawesome/free-brands-svg-icons';
 import { faUniversalAccess } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons/faEnvelope';
 
 
 const Homepage = () => {
@@ -78,7 +79,6 @@ const Homepage = () => {
         <div className={styles.listContainer} onClick={() => scrollToSection(section)}>
           <h4 className={styles.tabText}>{title}</h4>
           <div className={styles.line}></div>
-
         </div>
       </li>
     )
@@ -89,7 +89,7 @@ const Homepage = () => {
       <div className={styles.experienceWrapper}>
         <p>{year}</p>
         <div>
-          <p>{role}{description}</p>
+          <p>{role} <br /> {description}</p>
           <div className={styles.skillsContainer}>
             {skills.map(skill => <div key={skill} className={styles.skill}>{skill}</div>)}
           </div>
@@ -117,21 +117,21 @@ const Homepage = () => {
           </div>
           {!isMobile ?
             <ul className={styles.listStyle}>
-              <Navigation 
-              section={aboutSection}
-              title="About"
+              <Navigation
+                section={aboutSection}
+                title="About"
               />
-               <Navigation 
-              section={experienceSection}
-              title="Experience"
+              <Navigation
+                section={experienceSection}
+                title="Experience"
               />
-               <Navigation 
-              section={aboutSection}
-              title="Projects"
+              <Navigation
+                section={aboutSection}
+                title="Projects"
               />
-               <Navigation 
-              section={aboutSection}
-              title="Contact"
+              <Navigation
+                section={aboutSection}
+                title="Contact"
               />
             </ul>
             : <></>}
@@ -148,6 +148,9 @@ const Homepage = () => {
             <a href="https://www.goodreads.com/user/show/156277793-hanna">
               <FontAwesomeIcon icon={faGoodreads} />
             </a>
+            <a href="hannaabdulalim@gmail.com">
+              <FontAwesomeIcon icon={faEnvelope} />
+            </a>
           </div>
           <div className={styles.bottomRightIcons}>
             {!isMobile ? <FontAwesomeIcon icon={faUniversalAccess} /> : <></>}
@@ -159,9 +162,11 @@ const Homepage = () => {
         <div className={styles.rightContainer}>
           <div className={styles.rightContainerGrid} ref={aboutSection}>
             {isMobile ? <h3 className={styles.headersMobile} >About</h3> : <></>}
-            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. <br></br>
-              <br></br> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-              <br></br> <br></br> Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+            <p> I’m a frontend engineer passionate about crafting accessible, pixel-perfect user interfaces that blend thoughtful design with robust engineering. My work thrives at the intersection of creativity and technology, where I transform complex ideas into seamless, high-performing digital experiences.
+              <br /><br />
+              Over the years, I've developed software across a variety of industries — from building the entire front-end architecture at Mesmo to leading cross-platform solutions for startups like Jumeeya and Teff. Whether optimizing applications for scale or designing features that elevate usability, I bring a detail-oriented approach that prioritizes both performance and inclusivity.
+              <br /><br />
+              When I’m not coding, I enjoy exploring creative outlets like digital art and music production, finding inspiration in the overlap between artistry and technology. I’m also passionate about staying ahead of industry trends, constantly learning, and pushing the boundaries of what’s possible in web and mobile development.
             </p>
             {isMobile ? <h3 className={styles.headersMobile}>Experience</h3> : <></>}
             <div className={styles.experienceContainer} ref={experienceSection}>
