@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
-
-body {
-  font-family: 'Zen Dots', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
 
 /*Mouse glow effect */
 body::before {
@@ -40,7 +37,6 @@ body::before {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #27180D;
-  color: #FFF6D3;
   height: 100%;
   overflow: hidden;
 }
@@ -56,20 +52,20 @@ body::before {
 }
 
 .marquee {
-  height: 100vh;
   width: 100%;
-  writing-mode: vertical-rl;
-  color: #FFF6D3;
+  font-size: 0.9em;
 }
 
 /*Inner left side */
 .leftContainer {
+  font-family: 'Zen Dots', sans-serif;
   position: relative;
   margin: 0px 20px 20px 20px;
   position: relative;
   display: grid;
   height: 100vh;
   grid-template-rows: 0.9fr 0.4fr 0.8fr 1fr;
+  color: rgba(255, 246, 211, 0.8);
 }
 
 .title {
@@ -99,7 +95,6 @@ body::before {
 .line {
   width: 0;
   height: 2px;
-  background-color: #FFF6D3;
   position: absolute;
   left: 0;
   top: 50%;
@@ -110,7 +105,6 @@ body::before {
 .tabText {
   font-weight: normal;
   margin: 5px;
-  color: #FFF6D3;
   position: relative;
   transform-origin: center center;
   transition: transform 0.3s ease-in-out;
@@ -138,7 +132,6 @@ body::before {
   display: flex;
   justify-content: flex-start;
   margin-top: 10px;
-  color: #FFF6D3;
   margin-left: -5px;
 }
 
@@ -146,6 +139,8 @@ body::before {
   height: 26px;
   width: 26px;
   padding: 0px 5px 0px 5px;
+  text-decoration: none;
+  color:inherit;
 }
 
 .socials :hover {
@@ -158,6 +153,7 @@ body::before {
 }
 
 .bottomRightIcons {
+  display: flex;
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -165,23 +161,34 @@ body::before {
 }
 
 .bottomRightIcons * {
-  padding: 10px 10px 0px 10px
+  padding: 10px 10px 0px 10px;
 }
 
 .bottomRightIcons svg:hover {
   color: #FFD388;
   cursor: pointer;
 }
+.socials :hover{
+  font-size: 0.9em;
+  display: inline-block; 
+  animation: rotateText 4s;
+  transform-origin: center center;
+}
+
+@keyframes rotateText {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
 
 /*Inner Right side */
 .rightContainer {
-  background-image: url("./berkeley_sunset.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 90%;
+  font-family: 'Michroma', sans-serif;
   height: 100%;
   overflow-y: auto;
-  color: #350C00;
   font-size: 0.9em;
 }
 
@@ -193,15 +200,51 @@ body::before {
   display: grid;
   padding: 20px 20px 20px 20px;
   grid-template-rows: auto;
-  background-color: rgba(227, 163, 79, 0.8);
+   color: rgba(255, 246, 211, 0.7);
 }
 
 .experienceContainer {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr;
 }
+
 .experienceWrapper{
-  display: contents;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  text-decoration: none;
+  color:inherit;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.experienceWrapper:hover{
+  background-color: rgba(255, 211, 136, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  .role{
+    color:#FFD388
+  }
+}
+.experienceWrapper.dimmed {
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+.experienceWrapper p:first-child {
+  margin-top: 6px;
+  font-size: 0.9em;
+}
+
+.role {
+font-weight: normal;
+font-size: inherit;
+margin-block: none;
+margin: 0;
+margin-top: 5px;
+padding: 0;
+
+}
+.description{
+  margin-top: 5px;
 }
 
 .skillsContainer {
@@ -210,11 +253,14 @@ body::before {
   gap: 5px;
 }
 
-.skill {
-  background-color: #350C00;
-  color: rgb(255, 211, 136, 0.8);
-  border-radius: 8px;
-  padding: 5px 10px;
+.skill { 
+  /* background-color: rgba(53, 12, 0, 0.8);
+  color: rgb(255, 211, 136, 0.8); */
+  font-family: 'Zen Dots', sans-serif;
+  background-color: rgba(255, 211, 136, 0.4);
+  color: #350C00;
+  border-radius: 5px;
+  padding: 4px 10px;
   margin: 5px 0;
   font-size: 0.9em;
 }

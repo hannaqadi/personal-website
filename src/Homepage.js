@@ -1,14 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
 import sound from './you_read_my_mind.mp3'
-// import Marquee from "react-fast-marquee";
-// import { Marquee } from "@devnomic/marquee";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faCodepen } from '@fortawesome/free-brands-svg-icons';
 import { faGoodreads } from '@fortawesome/free-brands-svg-icons';
-import { faUniversalAccess } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons/faEnvelope';
@@ -18,6 +15,7 @@ const Homepage = () => {
   const [showVolume, setShowVolume] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1080);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   document.addEventListener('mousemove', (e) => {
     document.body.style.setProperty('--mouse-x', e.clientX);
@@ -73,6 +71,14 @@ const Homepage = () => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   const Navigation = ({ section, title }) => {
     return (
       <li>
@@ -84,17 +90,24 @@ const Homepage = () => {
     )
   }
 
-  const Experience = ({ year, role, description, skills }) => {
+  const expList = ["https://www.getmesmo.com/", "https://bazar-prime.com/", "https://teff.tech/", "https://specranks.com/laptops"]
+  const Experience = ({ year, role, description, skills, index }) => {
+    const isDimmed = hoveredIndex !== null && hoveredIndex !== expList[index];
     return (
-      <div className={styles.experienceWrapper}>
+      <a href={expList[index]} 
+      className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : ""}`}
+      onMouseEnter={() => handleMouseEnter(expList[index])}
+      onMouseLeave={handleMouseLeave}
+      >
         <p>{year}</p>
         <div>
-          <p>{role} <br /> {description}</p>
+          <h1 className={styles.role}>{role}</h1>
+          <p className={styles.description}>{description}</p>
           <div className={styles.skillsContainer}>
             {skills.map(skill => <div key={skill} className={styles.skill}>{skill}</div>)}
           </div>
         </div>
-      </div>
+      </a>
     )
   }
 
@@ -106,7 +119,6 @@ const Homepage = () => {
         src={sound}
       />
       <div className={styles.outerLeftContainer}>
-        <marquee direction="up" className={styles.marquee}>Now Playing: You read my mind by David Benoit</marquee>
       </div>
       <div className={styles.centerGridContainer}>
         <div className={styles.leftContainer}>
@@ -148,15 +160,17 @@ const Homepage = () => {
             <a href="https://www.goodreads.com/user/show/156277793-hanna">
               <FontAwesomeIcon icon={faGoodreads} />
             </a>
-            <a href="hannaabdulalim@gmail.com">
+            <a href="mailto:hannaabdulalim@gmail.com">
               <FontAwesomeIcon icon={faEnvelope} />
             </a>
           </div>
           <div className={styles.bottomRightIcons}>
-            {!isMobile ? <FontAwesomeIcon icon={faUniversalAccess} /> : <></>}
             {!isMobile ?
               <> {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconAndPlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconAndPlay} />} </>
               : <></>}
+            {/* <span className={styles.rotateText}>Now Playing: You Read my Mind by David Benoit</span> */}
+            <marquee direction="left" scrollamount="3" scrolldelay="40" className={styles.marquee}>Now Playing: You read my mind by David Benoit</marquee>
+
           </div>
         </div>
         <div className={styles.rightContainer}>
@@ -177,6 +191,7 @@ const Homepage = () => {
                 Maintained comprehensive documentation of the front-end codebase, facilitating easier future development and onboarding.
                 Leveraged cutting-edge tools and technologies to stay ahead of industry trends and deliver a modern, high-performing application."
                 skills={["React Native", "TypeScript", "CSS"]}
+                index={0}
               />
               <Experience
                 year="2022-2023"
@@ -186,6 +201,7 @@ const Homepage = () => {
                 Key contributor to technical team discussions that avoided major technical debt.
                 Worked with other team engineers to convert Swift application to React Native."
                 skills={["React Native", "TypeScript", "CSS"]}
+                index={1}
               />
               <Experience
                 year="2022-2022"
