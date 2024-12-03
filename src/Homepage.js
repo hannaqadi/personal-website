@@ -9,6 +9,7 @@ import { faGoodreads } from '@fortawesome/free-brands-svg-icons';
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons/faEnvelope';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 
 const Homepage = () => {
@@ -90,27 +91,42 @@ const Homepage = () => {
     )
   }
 
-  const expList = ["https://www.getmesmo.com/", "https://bazar-prime.com/", "https://teff.tech/", "https://specranks.com/laptops"]
-  const Experience = ({ year, role, description, skills, index }) => {
+  const expList = ["https://www.getmesmo.com/", "https://bazar-prime.com/", "", "https://teff.tech/", "https://specranks.com/laptops"]
+  const Experience = ({ index, year, role, description, skills }) => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== expList[index];
     return (
-      <a href={expList[index]} 
-      className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : ""}`}
-      onMouseEnter={() => handleMouseEnter(expList[index])}
-      onMouseLeave={handleMouseLeave}
+      <a href={expList[index]}
+        className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : ""}`}
+        onMouseEnter={() => handleMouseEnter(expList[index])}
+        onMouseLeave={handleMouseLeave}
       >
         <p>{year}</p>
         <div>
-          <h1 className={styles.role}>{role}</h1>
+          <h1 className={styles.role}>{role}  <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} /></h1>
           <p className={styles.description}>{description}</p>
           <div className={styles.skillsContainer}>
             {skills.map(skill => <div key={skill} className={styles.skill}>{skill}</div>)}
           </div>
         </div>
+
       </a>
     )
   }
 
+  const projectList = ["", "https://codepen.io/hxnoons"]
+  const Project = ({ index, text }) => {
+    const isDimmed = hoveredIndex !== null && hoveredIndex !== projectList[index];
+    return (
+      <a href={projectList[index]}
+        className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : ""}`}
+        onMouseEnter={() => handleMouseEnter(projectList[index])}
+        onMouseLeave={handleMouseLeave}
+      >
+        <p>insert image</p>
+        <p>{text}</p>
+      </a>
+    )
+  }
   return (
     <div className={styles.mainContainer}>
       <audio
@@ -168,8 +184,7 @@ const Homepage = () => {
             {!isMobile ?
               <> {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconAndPlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconAndPlay} />} </>
               : <></>}
-            {/* <span className={styles.rotateText}>Now Playing: You Read my Mind by David Benoit</span> */}
-            <marquee direction="left" scrollamount="3" scrolldelay="40" className={styles.marquee}>Now Playing: You read my mind by David Benoit</marquee>
+            {!isMobile ? <marquee direction="left" scrollamount="3" scrolldelay="40" className={styles.marquee}>Now Playing: You read my mind by David Benoit</marquee> : <></>}
 
           </div>
         </div>
@@ -183,17 +198,18 @@ const Homepage = () => {
               When I’m not coding, I enjoy exploring creative outlets like digital art and music production, finding inspiration in the overlap between artistry and technology. I’m also passionate about staying ahead of industry trends, constantly learning, and pushing the boundaries of what’s possible in web and mobile development.
             </p>
             {isMobile ? <h3 className={styles.headersMobile}>Experience</h3> : <></>}
-            <div className={styles.experienceContainer} ref={experienceSection}>
+            <div ref={experienceSection}>
               <Experience
+                index={0}
                 year="2024-2024"
                 role="Mesmo - Frontend Developer"
                 description="Developed the entire front-end architecture from scratch using React Native, ensuring a seamless and efficient user experience.
                 Maintained comprehensive documentation of the front-end codebase, facilitating easier future development and onboarding.
                 Leveraged cutting-edge tools and technologies to stay ahead of industry trends and deliver a modern, high-performing application."
                 skills={["React Native", "TypeScript", "CSS"]}
-                index={0}
               />
               <Experience
+                index={1}
                 year="2022-2023"
                 role="Bazar - Frontend Developer"
                 description="Lead development of inventory management tools used by all current merchants on mobile platforms.
@@ -201,25 +217,9 @@ const Homepage = () => {
                 Key contributor to technical team discussions that avoided major technical debt.
                 Worked with other team engineers to convert Swift application to React Native."
                 skills={["React Native", "TypeScript", "CSS"]}
-                index={1}
               />
               <Experience
-                year="2022-2022"
-                role="Jumeeya-Frontend Developer"
-                description=" Lead the Android efforts for a closed beta starting before the end of the year.
-                  Configured mobile OS specific elements and packages to function properly between IOS and Android platforms.
-                  Unified user interface across mobile OS and reconfigured CSS to be more responsive across device sizes and platforms."
-                skills={["React Native", "TypeScript", "CSS"]}
-              />
-              <Experience
-                year="2022-2022"
-                role="Jumeeya-Frontend Developer"
-                description=" Lead the Android efforts for a closed beta starting before the end of the year.
-                  Configured mobile OS specific elements and packages to function properly between IOS and Android platforms.
-                  Unified user interface across mobile OS and reconfigured CSS to be more responsive across device sizes and platforms."
-                skills={["React Native", "TypeScript", "CSS"]}
-              />
-              <Experience
+                index={2}
                 year="2022-2022"
                 role="Jumeeya-Frontend Developer"
                 description=" Lead the Android efforts for a closed beta starting before the end of the year.
@@ -228,6 +228,19 @@ const Homepage = () => {
                 skills={["React Native", "TypeScript", "CSS"]}
               />
             </div>
+            <div style={{marginTop:"10px", marginBottom: "10px"}}>
+              <a>View full resume </a>
+              <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} /></div>
+            {isMobile ? <h3 className={styles.headersMobile}>Projects</h3> : <></>}
+
+            <Project
+              text="Explore my interactive p5.js portfolio, where creativity meets code. Dive into dynamic animations, playful visual experiments, and engaging digital art pieces"
+            />
+            <Project
+              index={1}
+              text="Take a look at my CodePen portfolio to see some of the web experiments and creative coding projects I've been working on. It's where I explore ideas and try out new techniques in front-end development"
+            />
+<div><p>Loosely designed in Figma and coded in Visual Studio Code. Built with React and Node.js. The two fonts used are Zen Dots and Michroma</p></div>
           </div>
         </div>
       </div>

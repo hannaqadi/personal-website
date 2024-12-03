@@ -30,7 +30,7 @@ body::before {
   height: 100vh;
   width: 100vw;
   background-color: #27180D;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .centerGridContainer {
@@ -140,7 +140,7 @@ body::before {
   width: 26px;
   padding: 0px 5px 0px 5px;
   text-decoration: none;
-  color:inherit;
+  color: inherit;
 }
 
 .socials :hover {
@@ -168,9 +168,10 @@ body::before {
   color: #FFD388;
   cursor: pointer;
 }
-.socials :hover{
+
+.socials :hover {
   font-size: 0.9em;
-  display: inline-block; 
+  display: inline-block;
   animation: rotateText 4s;
   transform-origin: center center;
 }
@@ -179,6 +180,7 @@ body::before {
   from {
     transform: rotateX(0deg);
   }
+
   to {
     transform: rotateX(360deg);
   }
@@ -198,52 +200,54 @@ body::before {
 
 .rightContainerGrid {
   display: grid;
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
   grid-template-rows: auto;
-   color: rgba(255, 246, 211, 0.7);
+  color: rgba(255, 246, 211, 0.7);
 }
-
-.experienceContainer {
-  display: grid;
-  grid-template-rows: 1fr;
+.rightContainerGrid p:first-child {
+  margin-left: 5px;
+  margin-right: 5px;
 }
-
-.experienceWrapper{
+.experienceWrapper {
   display: grid;
   grid-template-columns: 1fr 3fr;
   text-decoration: none;
-  color:inherit;
-  padding-left: 10px;
-  padding-right: 10px;
+  color: inherit;
 }
 
-.experienceWrapper:hover{
+.experienceWrapper:hover {
   background-color: rgba(255, 211, 136, 0.1);
   border-radius: 10px;
   cursor: pointer;
-  .role{
-    color:#FFD388
+  .role {
+    color: #FFD388
+  }
+  .iconArrow {
+    color: #FFD388
   }
 }
+
 .experienceWrapper.dimmed {
   opacity: 0.5;
   transition: opacity 0.3s ease-in-out;
 }
-.experienceWrapper p:first-child {
-  margin-top: 6px;
+
+.experienceWrapper > :first-child {
+  margin-top: 10px;
   font-size: 0.9em;
 }
 
 .role {
-font-weight: normal;
-font-size: inherit;
-margin-block: none;
-margin: 0;
-margin-top: 5px;
-padding: 0;
+  font-weight: normal;
+  font-size: inherit;
+  margin-block: none;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
 
 }
-.description{
+
+.description {
   margin-top: 5px;
 }
 
@@ -253,9 +257,7 @@ padding: 0;
   gap: 5px;
 }
 
-.skill { 
-  /* background-color: rgba(53, 12, 0, 0.8);
-  color: rgb(255, 211, 136, 0.8); */
+.skill {
   font-family: 'Zen Dots', sans-serif;
   background-color: rgba(255, 211, 136, 0.4);
   color: #350C00;
@@ -265,7 +267,17 @@ padding: 0;
   font-size: 0.9em;
 }
 
+.iconArrow {
+  justify-self: center;
+  margin-top: 5px;
+  height:15px;
+  width:15px;
+}
 
+.projectWrapper{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
 /* Phone Sizing */
 @media (max-width: 1080px) {
   .mainContainer {
@@ -296,7 +308,7 @@ padding: 0;
   }
 
   .centerGridContainer::-webkit-scrollbar {
-    width:12px;
+    width: 12px;
   }
 
   .leftContainer {
@@ -306,18 +318,21 @@ padding: 0;
     grid-template-rows: 1fr 0.4fr;
     height: auto;
     width: 100%;
+    color: rgba(255, 246, 211, 0.8);
   }
-
   .rightContainer {
-    background-image: url("./berkeley_sunset.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 90%;
-    height: auto;
-    color: #350C00;
+    font-family: 'Michroma', sans-serif;
+    height: 100%;
+    overflow-y: auto;
     font-size: 0.9em;
   }
-  
+
+  .rightContainerGrid {
+    display: grid;
+    padding: 20px 20px 20px 20px;
+    grid-template-rows: auto;
+    color: rgba(255, 246, 211, 0.7);
+  }
   .title {
     font-size: 0.7em;
     padding: 0px 30px 0px 20px;
@@ -330,7 +345,6 @@ padding: 0;
 
   .socials {
     margin-top: 10px;
-    color: #FFF6D3;
     margin-left: 15px;
   }
 
@@ -355,21 +369,16 @@ padding: 0;
     display: block;
   }
 
-  
-  .rightContainerGrid {
-    display: grid;
-    margin:0px;
-    padding: 0px 20px 0px 20px;
-    grid-template-rows: auto;
-    background-color: rgba(227, 163, 79, 0.8);
-  }
-
-  .headersMobile{
+  .headersMobile {
     font-weight: normal;
-    margin-top:10px;
+    margin-top: 10px;
     margin-bottom: 0px;
-    padding:0px;
+    padding: 0px;
     font-size: 1.3em;
+  }
+  /* removes mouse glow */
+  body::before{
+    display:none;
   }
 
 }
