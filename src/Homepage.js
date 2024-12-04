@@ -18,35 +18,19 @@ const Homepage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1080);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
+  const audioRef = useRef(null)
+  const aboutSection = useRef(null)
+  const experienceSection = useRef(null)
+  const projectSection = useRef(null)
+  const rightContainerRef = useRef(null);
+
+  /*For Mouse Glow */
   document.addEventListener('mousemove', (e) => {
     document.body.style.setProperty('--mouse-x', e.clientX);
     document.body.style.setProperty('--mouse-y', e.clientY);
   });
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1080);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const audioRef = useRef(null)
-  const aboutSection = useRef(null)
-  const experienceSection = useRef(null)
-  const projectSection = useRef(null)
-
-  const rightContainerRef = useRef(null);
-
-  const handleVolumeIcon = () => {
-    setShowVolume(prevState => !prevState)
-  }
-
-  const playPause = () => {
-    setIsPlaying(prevState => !prevState);
-  };
-
+  /*Audio*/
   useEffect(() => {
     if (audioRef.current) {
       const playAudio = async () => {
@@ -60,14 +44,37 @@ const Homepage = () => {
           console.error("Audio playback failed:", error);
         }
       };
-
       playAudio();
     }
   }, [isPlaying]);
 
+  /*Checks if Mobile*/
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1080);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  /*Global Scrolling */
+  useEffect(() => {
+    const handleGlobalScroll = (event) => {
+      if (rightContainerRef.current) {
+        rightContainerRef.current.scrollTop += event.deltaY;
+        event.preventDefault();
+      }
+    };
+    document.addEventListener('wheel', handleGlobalScroll, { passive: false });
+    return () => {
+      document.removeEventListener('wheel', handleGlobalScroll);
+    };
+  }, []);
+
   const handleIconAndPlay = () => {
-    handleVolumeIcon()
-    playPause()
+    setIsPlaying(prevState => !prevState)
+    setShowVolume(prevState => !prevState)
   }
 
   const scrollToSection = (ref) => {
@@ -81,21 +88,6 @@ const Homepage = () => {
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
-
-  useEffect(() => {
-    const handleGlobalScroll = (event) => {
-      if (rightContainerRef.current) {
-        rightContainerRef.current.scrollTop += event.deltaY;
-        event.preventDefault();
-      }
-    };
-
-    document.addEventListener('wheel', handleGlobalScroll, { passive: false });
-
-    return () => {
-      document.removeEventListener('wheel', handleGlobalScroll);
-    };
-  }, []);
 
   const Navigation = ({ section, title }) => {
     return (
