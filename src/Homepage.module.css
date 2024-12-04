@@ -90,6 +90,7 @@ body::before {
   align-items: center;
   position: relative;
   cursor: pointer;
+  width: fit-content;
 }
 
 .line {
@@ -110,14 +111,14 @@ body::before {
   transition: transform 0.3s ease-in-out;
 }
 
-.tabText:hover {
+.listContainer:hover .tabText {
   transform: translateX(50px);
   color: #FFD388;
   cursor: pointer;
 }
 
-/* Ensure only the line associated with the hovered text animates */
-.tabText:hover+.line {
+/* Ensures only the line associated with the hovered text animates */
+.listContainer:hover .line {
   width: 40px;
   background-color: #FFD388;
   cursor: pointer;
@@ -219,11 +220,15 @@ body::before {
   background-color: rgba(255, 211, 136, 0.1);
   border-radius: 10px;
   cursor: pointer;
+
   .role {
-    color: #FFD388
+    color: #FFD388;
   }
+
   .iconArrow {
-    color: #FFD388
+    color: #FFD388;
+    transition: transform 0.2s ease;
+    transform: translate(3px, -3px);
   }
 }
 
@@ -274,11 +279,29 @@ body::before {
   width:15px;
 }
 
+.viewResume{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.viewResume:hover{
+  color:  #FFD388;
+  cursor:pointer;
+  
+  .iconArrow {
+    color: #FFD388;
+    transition: transform 0.2s ease;
+    transform: translate(3px, -3px);
+  }
+}
+
 .projectWrapper{
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
-/* Phone Sizing */
+
+
+/*------------------------------------------ Phone Sizing-------------------------------------- */
 @media (max-width: 1080px) {
   .mainContainer {
     display: grid;

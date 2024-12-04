@@ -35,7 +35,9 @@ const Homepage = () => {
   const audioRef = useRef(null)
   const aboutSection = useRef(null)
   const experienceSection = useRef(null)
+  const projectSection = useRef(null)
 
+  const rightContainerRef = useRef(null);
 
   const handleVolumeIcon = () => {
     setShowVolume(prevState => !prevState)
@@ -80,6 +82,21 @@ const Homepage = () => {
     setHoveredIndex(null);
   };
 
+  useEffect(() => {
+    const handleGlobalScroll = (event) => {
+      if (rightContainerRef.current) {
+        rightContainerRef.current.scrollTop += event.deltaY;
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('wheel', handleGlobalScroll, { passive: false });
+
+    return () => {
+      document.removeEventListener('wheel', handleGlobalScroll);
+    };
+  }, []);
+
   const Navigation = ({ section, title }) => {
     return (
       <li>
@@ -96,13 +113,16 @@ const Homepage = () => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== expList[index];
     return (
       <a href={expList[index]}
-        className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : ""}`}
+        className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : styles.experienceWrapper}`}
         onMouseEnter={() => handleMouseEnter(expList[index])}
         onMouseLeave={handleMouseLeave}
       >
         <p>{year}</p>
         <div>
-          <h1 className={styles.role}>{role}  <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} /></h1>
+          <h1 className={styles.role} style={isMobile ? { color: "#FFD388" } : null}>
+            {role}
+            <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} />
+          </h1>
           <p className={styles.description}>{description}</p>
           <div className={styles.skillsContainer}>
             {skills.map(skill => <div key={skill} className={styles.skill}>{skill}</div>)}
@@ -127,6 +147,7 @@ const Homepage = () => {
       </a>
     )
   }
+
   return (
     <div className={styles.mainContainer}>
       <audio
@@ -154,7 +175,7 @@ const Homepage = () => {
                 title="Experience"
               />
               <Navigation
-                section={aboutSection}
+                section={projectSection}
                 title="Projects"
               />
               <Navigation
@@ -188,7 +209,7 @@ const Homepage = () => {
 
           </div>
         </div>
-        <div className={styles.rightContainer}>
+        <div className={styles.rightContainer} ref={rightContainerRef}>
           <div className={styles.rightContainerGrid} ref={aboutSection}>
             {isMobile ? <h3 className={styles.headersMobile} >About</h3> : <></>}
             <p> I’m a frontend engineer passionate about crafting accessible, pixel-perfect user interfaces that blend thoughtful design with robust engineering. My work thrives at the intersection of creativity and technology, where I transform complex ideas into seamless, high-performing digital experiences.
@@ -228,19 +249,21 @@ const Homepage = () => {
                 skills={["React Native", "TypeScript", "CSS"]}
               />
             </div>
-            <div style={{marginTop:"10px", marginBottom: "10px"}}>
+            <div className={styles.viewResume}>
               <a>View full resume </a>
-              <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} /></div>
+              <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} />
+            </div>
             {isMobile ? <h3 className={styles.headersMobile}>Projects</h3> : <></>}
-
-            <Project
-              text="Explore my interactive p5.js portfolio, where creativity meets code. Dive into dynamic animations, playful visual experiments, and engaging digital art pieces"
-            />
-            <Project
-              index={1}
-              text="Take a look at my CodePen portfolio to see some of the web experiments and creative coding projects I've been working on. It's where I explore ideas and try out new techniques in front-end development"
-            />
-<div><p>Loosely designed in Figma and coded in Visual Studio Code. Built with React and Node.js. The two fonts used are Zen Dots and Michroma</p></div>
+            <div ref={projectSection}>
+              <Project
+                text="Explore my interactive p5.js portfolio, where creativity meets code. Dive into dynamic animations, playful visual experiments, and engaging digital art pieces"
+              />
+              <Project
+                index={1}
+                text="Take a look at my CodePen portfolio to see some of the web experiments and creative coding projects I've been working on. It's where I explore ideas and try out new techniques in front-end development"
+              />
+            </div>
+            <div><p>Loosely designed in Figma and coded in Visual Studio Code. Built from scratch with React.js. The two fonts used are Zen Dots and Michroma</p></div>
           </div>
         </div>
       </div>
