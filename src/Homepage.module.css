@@ -41,21 +41,6 @@ body::before {
   overflow: hidden;
 }
 
-/*Outer left side */
-.outerLeftContainer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-
-.marquee {
-  width: 100%;
-  font-size: 0.9em;
-}
-
 /*Inner left side */
 .leftContainer {
   font-family: 'Zen Dots', sans-serif;
@@ -129,6 +114,18 @@ body::before {
   transition: transform 0.3s ease-in-out;
 }
 
+.listContainer.active .tabText{
+  transform: translateX(50px);
+  color: #FFD388;
+  cursor: pointer;
+}
+
+.listContainer.active .line {
+  width: 40px;
+  background-color: #FFD388;
+  cursor: pointer;
+}
+
 .socials {
   display: flex;
   justify-content: flex-start;
@@ -153,7 +150,7 @@ body::before {
   color: #FFF6D3;
 }
 
-.bottomRightIcons {
+.bottomLeftIcons {
   display: flex;
   position: absolute;
   bottom: 10px;
@@ -161,33 +158,26 @@ body::before {
   margin-left: -5px;
 }
 
-.bottomRightIcons * {
+.bottomLeftIcons * {
   padding: 10px 10px 0px 10px;
 }
 
-.bottomRightIcons svg:hover {
+.bottomLeftIcons svg:hover {
   color: #FFD388;
   cursor: pointer;
 }
 
-.socials :hover {
+.marquee {
+  width: 100%;
   font-size: 0.9em;
-  display: inline-block;
-  animation: rotateText 4s;
-  transform-origin: center center;
 }
 
-@keyframes rotateText {
-  from {
-    transform: rotateX(0deg);
-  }
-
-  to {
-    transform: rotateX(360deg);
-  }
+.bottomLeftIcons:hover {
+  animation-play-state: paused;
+  cursor:pointer;
 }
 
-/*Inner Right side */
+/*--------------------------------------Inner Right side---------------------------------------- */
 .rightContainer {
   font-family: 'Michroma', sans-serif;
   height: 100%;
@@ -217,7 +207,7 @@ body::before {
 }
 
 .experienceWrapper:hover {
-  background-color: rgba(255, 211, 136, 0.1);
+  background-color: rgba(255, 211, 136, 0.05);
   border-radius: 10px;
   cursor: pointer;
 
@@ -377,14 +367,14 @@ body::before {
     padding: 0px 5px 0px 5px;
   }
 
-  .bottomRightIcons {
+  .bottomLeftIcons {
     position: absolute;
     bottom: 10px;
     left: 10px;
     margin-left: -5px;
   }
 
-  .bottomRightIcons * {
+  .bottomLeftIcons * {
     padding: 10px 10px 0px 10px
   }
 

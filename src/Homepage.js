@@ -17,6 +17,7 @@ const Homepage = () => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1080);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [activeSection, setActiveSection] = useState(null);
 
   const audioRef = useRef(null)
   const aboutSection = useRef(null)
@@ -81,6 +82,11 @@ const Homepage = () => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleClick = (section) => {
+    setActiveSection(section); // Set the active section when clicked
+    scrollToSection(section); // Assuming scrollToSection is defined elsewhere
+  };
+
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
   };
@@ -92,9 +98,11 @@ const Homepage = () => {
   const Navigation = ({ section, title }) => {
     return (
       <li>
-        <div className={styles.listContainer} onClick={() => scrollToSection(section)}>
-          <h4 className={styles.tabText}>{title}</h4>
-          <div className={styles.line}></div>
+        <div className={`${styles.listContainer} ${activeSection === section ? styles.active : ''}`}
+          onClick={() => handleClick(section)}
+        >
+          <h4 className={`${styles.tabText} ${activeSection === section ? styles.activeText : ''}`}>{title}</h4>
+          <div className={`${styles.line} ${activeSection === section ? styles.activeLine : ''}`}></div>
         </div>
       </li>
     )
@@ -170,17 +178,13 @@ const Homepage = () => {
                 section={projectSection}
                 title="Projects"
               />
-              <Navigation
-                section={aboutSection}
-                title="Contact"
-              />
             </ul>
             : <></>}
           <div className={styles.socials}>
             <a href="https://github.com/hxnoons">
               <FontAwesomeIcon icon={faGithub} />
             </a>
-            <a href="https://www.linkedin.com/in/hannaabdulalim/">
+            <a href="https://www.linkedin.com/in/hannaqadi/">
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
             <a href="https://codepen.io/hxnoons">
@@ -193,12 +197,23 @@ const Homepage = () => {
               <FontAwesomeIcon icon={faEnvelope} />
             </a>
           </div>
-          <div className={styles.bottomRightIcons}>
+          <div className={styles.bottomLeftIcons}>
             {!isMobile ?
               <> {showVolume ? <FontAwesomeIcon icon={faVolumeHigh} onClick={handleIconAndPlay} /> : <FontAwesomeIcon icon={faVolumeXmark} onClick={handleIconAndPlay} />} </>
               : <></>}
-            {!isMobile ? <marquee direction="left" scrollamount="3" scrolldelay="40" className={styles.marquee}>Now Playing: You read my mind by David Benoit</marquee> : <></>}
-
+            {!isMobile ?
+              <marquee
+                direction="left"
+                scrollamount="3"
+                scrolldelay="40"
+                title="yes the marquee is depracated and is an accesibility issue, but i think it looks cool :')"
+                className={styles.marquee}
+                onMouseOver={(e) => e.target.stop()}
+                onMouseOut={(e) => e.target.start()}
+                >
+                Now Playing: You read my mind by David Benoit
+              </marquee>
+              : <></>}
           </div>
         </div>
         <div className={styles.rightContainer} ref={rightContainerRef}>
@@ -216,29 +231,43 @@ const Homepage = () => {
                 index={0}
                 year="2024-2024"
                 role="Mesmo - Frontend Developer"
-                description="Developed the entire front-end architecture from scratch using React Native, ensuring a seamless and efficient user experience.
-                Maintained comprehensive documentation of the front-end codebase, facilitating easier future development and onboarding.
-                Leveraged cutting-edge tools and technologies to stay ahead of industry trends and deliver a modern, high-performing application."
+                description="Built the front-end architecture from scratch with React Native, delivering a modern, efficient user experience and maintaining comprehensive documentation for seamless future development."
                 skills={["React Native", "TypeScript", "CSS"]}
               />
               <Experience
                 index={1}
                 year="2022-2023"
                 role="Bazar - Frontend Developer"
-                description="Lead development of inventory management tools used by all current merchants on mobile platforms.
-                Worked with founders to outline technical scope of future features.
-                Key contributor to technical team discussions that avoided major technical debt.
-                Worked with other team engineers to convert Swift application to React Native."
+                description="Led development of inventory tools for mobile merchants, collaborated on feature planning, mitigated technical debt, and transitioned a Swift app to React Native."
                 skills={["React Native", "TypeScript", "CSS"]}
               />
               <Experience
                 index={2}
                 year="2022-2022"
                 role="Jumeeya-Frontend Developer"
-                description=" Lead the Android efforts for a closed beta starting before the end of the year.
-                  Configured mobile OS specific elements and packages to function properly between IOS and Android platforms.
-                  Unified user interface across mobile OS and reconfigured CSS to be more responsive across device sizes and platforms."
+                description="Led Android development for a closed beta, ensured cross-platform compatibility, and unified the UI with responsive CSS for diverse devices."
                 skills={["React Native", "TypeScript", "CSS"]}
+              />
+              <Experience
+                index={3}
+                year="2021-2021"
+                role="Teff-Frontend Developer"
+                description="Designed custom React hook-based authentication, led efforts to increase test coverage with Jest, and built features interfacing with internal APIs."
+                skills={["React","Javascript", "TypeScript", "CSS", "HTML", "Jest"]}
+              />
+              <Experience
+                index={4}
+                year="2020-2021"
+                role="Specranks-Fullstack Developer"
+                description="Refactored pages for 70,000+ live product listings using modern React patterns, updated libraries for improved performance, identified potential bugs, and ensured thorough documentation throughout the process."
+                skills={["React", "Javascript", "TypeScript", "CSS", "HTML", "Node.js", "SQL"]}
+              />
+              <Experience
+                index={4}
+                year="2019-2019"
+                role="Specranks-Database Administrator"
+                description="Collaborated on efficient database schema design, optimized structures for better data organization, and reorganized tables for simplified retrieval and reporting."
+                skills={["SQL"]}
               />
             </div>
             <div className={styles.viewResume}>
