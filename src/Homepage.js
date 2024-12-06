@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
-import sound from './you_read_my_mind.mp3'
+import sound from './assets/you_read_my_mind.mp3'
+import codepenImg from './assets/codepen_thumbnail.png'
+import openprocessingImg from './assets/openprocessing_thumbnail.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -113,7 +115,7 @@ const Homepage = () => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== expList[index];
     return (
       <a href={expList[index]}
-        className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : styles.experienceWrapper}`}
+        className={`${styles.wrapper} ${isDimmed ? styles.dimmed : styles.experienceWrapper}`}
         onMouseEnter={() => handleMouseEnter(expList[index])}
         onMouseLeave={handleMouseLeave}
       >
@@ -133,16 +135,16 @@ const Homepage = () => {
     )
   }
 
-  const projectList = ["", "https://codepen.io/hxnoons"]
-  const Project = ({ index, text }) => {
+  const projectList = ["https://openprocessing.org/user/489802/?o=1&view=sketches", "https://codepen.io/hxnoons"]
+  const Project = ({ index, image, altImg, text }) => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== projectList[index];
     return (
       <a href={projectList[index]}
-        className={`${styles.experienceWrapper} ${isDimmed ? styles.dimmed : ""}`}
+        className={`${styles.wrapper} ${isDimmed ? styles.dimmed : ""}`}
         onMouseEnter={() => handleMouseEnter(projectList[index])}
         onMouseLeave={handleMouseLeave}
       >
-        <p>insert image</p>
+        <img src={image} alt={altImg} className={styles.imageStyle} />
         <p>{text}</p>
       </a>
     )
@@ -210,7 +212,7 @@ const Homepage = () => {
                 className={styles.marquee}
                 onMouseOver={(e) => e.target.stop()}
                 onMouseOut={(e) => e.target.start()}
-                >
+              >
                 Now Playing: You read my mind by David Benoit
               </marquee>
               : <></>}
@@ -253,7 +255,7 @@ const Homepage = () => {
                 year="2021-2021"
                 role="Teff-Frontend Developer"
                 description="Designed custom React hook-based authentication, led efforts to increase test coverage with Jest, and built features interfacing with internal APIs."
-                skills={["React","Javascript", "TypeScript", "CSS", "HTML", "Jest"]}
+                skills={["React", "Javascript", "TypeScript", "CSS", "HTML", "Jest"]}
               />
               <Experience
                 index={4}
@@ -276,15 +278,29 @@ const Homepage = () => {
             </div>
             {isMobile ? <h3 className={styles.headersMobile}>Projects</h3> : <></>}
             <div ref={projectSection}>
-              <Project
-                text="Explore my interactive p5.js portfolio, where creativity meets code. Dive into dynamic animations, playful visual experiments, and engaging digital art pieces"
-              />
+
               <Project
                 index={1}
+                image={codepenImg}
+                alt="The front page of the codepen website which includes multiple images of other users work"
                 text="Take a look at my CodePen portfolio to see some of the web experiments and creative coding projects I've been working on. It's where I explore ideas and try out new techniques in front-end development"
               />
+              <Project
+                index={0}
+                image={openprocessingImg}
+                alt="The front page of the openprocessing website which includes multiple images of other users work"
+                text="Explore my OpenProcessing portfolio, where creativity meets code. Dive into dynamic animations, playful visual experiments, and engaging digital art pieces"
+              />
             </div>
-            <div><p>Loosely designed in Figma and coded in Visual Studio Code. Built from scratch with React.js. The two fonts used are Zen Dots and Michroma</p></div>
+            <div className={styles.anchorStyle}>
+              <p>Loosely designed in
+                <a href="https://www.figma.com/"> Figma</a> and coded in
+                <a href="https://code.visualstudio.com/"> Visual Studio Code.</a> Built from scratch with
+                <a href="https://react.dev/"> React.js.</a> The two fonts used are
+                <a href="https://fonts.google.com/specimen/Zen+Dots"> Zen Dots</a> and
+                <a href="https://fonts.google.com/specimen/Michroma"> Michroma</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
