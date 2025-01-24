@@ -1,9 +1,9 @@
 import Homepage from './Homepage';
-
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
+
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/personal-website">
     <Routes>
       <Route path="/" element={<Homepage/>} />
     </Routes>
