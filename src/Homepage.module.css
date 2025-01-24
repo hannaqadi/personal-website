@@ -49,7 +49,7 @@ body::before {
   position: relative;
   display: grid;
   height: 100vh;
-  grid-template-rows: 0.9fr 0.4fr 0.8fr 1fr;
+  grid-template-rows: 0.9fr 0.3fr 0.8fr 1fr;
   color: rgba(255, 246, 211, 0.8);
 }
 
