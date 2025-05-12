@@ -2,12 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import styles from './Homepage.module.css';
 import sound from './assets/you_read_my_mind.mp3'
 import codepenImg from './assets/codepen_thumbnail.png'
-import openprocessingImg from './assets/openprocessing_thumbnail.png'
+import madlitImg from './assets/madlit_screenshot.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faCodepen } from '@fortawesome/free-brands-svg-icons';
-import { faGoodreads } from '@fortawesome/free-brands-svg-icons';
+
 import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons/faEnvelope';
@@ -96,20 +95,21 @@ const Homepage = () => {
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
-
   const Navigation = ({ section, title }) => {
+    const isActive = activeSection && activeSection === section;
+
     return (
       <li>
-        <div className={`${styles.listContainer} ${activeSection === section ? styles.active : ''}`}
-          onClick={() => handleClick(section)}
+        <div
+          className={`${styles.listContainer} ${isActive ? styles.active : ''}`}
+          onClick={() => section && handleClick(section)}
         >
-          <h4 className={`${styles.tabText} ${activeSection === section ? styles.activeText : ''}`}>{title}</h4>
-          <div className={`${styles.line} ${activeSection === section ? styles.activeLine : ''}`}></div>
+          <h4 className={`${styles.tabText} ${isActive ? styles.activeText : ''}`}>{title}</h4>
+          <div className={`${styles.line} ${isActive ? styles.activeLine : ''}`}></div>
         </div>
       </li>
-    )
-  }
-
+    );
+  };
   const expList = ["https://www.getmesmo.com/", "https://bazar-prime.com/", "", "https://teff.tech/", "https://specranks.com/laptops"]
   const Experience = ({ index, year, role, description, skills }) => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== expList[index];
@@ -146,7 +146,7 @@ const Homepage = () => {
       >
         <img src={image} alt={altImg} className={styles.imageStyle} />
 
-        <p><p style={{marginLeft:"0px"}}>{title}</p>{text}</p>
+        <p style={{marginTop:"0px" }}><p style={{ marginLeft: "0px", marginTop:"0px" }}>{title}</p>{text}</p>
       </a>
     )
   }
@@ -181,10 +181,19 @@ const Homepage = () => {
                 section={projectSection}
                 title="Projects"
               />
+              <a href={`${process.env.PUBLIC_URL}/ResumeDM2.pdf`}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Navigation
+                  section={null}
+                  title="Resume"
+                />
+              </a>
             </ul>
             : <></>}
           <div className={styles.socials}>
-            <a href="https://github.com/hxnoons">
+            <a href="https://github.com/hannaqadi">
               <FontAwesomeIcon icon={faGithub} />
             </a>
             <a href="https://www.linkedin.com/in/hannaqadi/">
@@ -222,7 +231,7 @@ const Homepage = () => {
               <br /><br />
               When I’m not coding, I enjoy exploring creative outlets like digital art and music production, finding inspiration in the overlap between artistry and technology. I’m also passionate about staying ahead of industry trends, constantly learning, and pushing the boundaries of what’s possible in web and mobile development.
             </p>
-            {isMobile ? <h3 className={styles.headersMobile}>Experience</h3> : <></>}
+            {isMobile ? <h3 className={styles.headersMobile}>Experience</h3> : <i>Experience</i>}
             <div ref={experienceSection}>
               <Experience
                 index={0}
@@ -267,18 +276,11 @@ const Homepage = () => {
                 skills={["SQL"]}
               />
             </div>
-            <div className={styles.viewResume}>
-              <a href={`${process.env.PUBLIC_URL}/ResumeDM2.pdf`}
-                style={{ color: 'inherit', textDecoration: 'none' }}
-                target="_blank"
-                rel="noopener noreferrer">View current resume </a>
-              <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} />
-            </div>
-            {isMobile ? <h3 className={styles.headersMobile}>Projects</h3> : <></>}
+            {isMobile ? <h3 className={styles.headersMobile}>Projects</h3> : <i>Projects</i>}
             <div ref={projectSection}>
               <Project
                 index={1}
-                image={codepenImg}
+                image={madlitImg}
                 alt="oops"
                 title="Madlit"
                 text="Madlit is a lighthearted word game inspired by Mad Gabs, designed to spark laughter through unexpected storytelling. Players input words based on parts of speech — like nouns, verbs, and adjectives — which are then woven into a pre-written story template. Once complete, the result is a silly, often nonsensical story that surprises and entertains. The project is nearly finished and will be launching soon!"
@@ -297,6 +299,13 @@ const Homepage = () => {
               /> */}
             </div>
             <div className={styles.anchorStyle}>
+              <div className={styles.viewResume}>
+                <a href={`${process.env.PUBLIC_URL}/ResumeDM2.pdf`}
+                  style={{ color: 'inherit', textDecoration: 'none' }}
+                  target="_blank"
+                  rel="noopener noreferrer">View current resume </a>
+                <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} />
+              </div>
               <p>Loosely designed in
                 <a href="https://www.figma.com/"> Figma</a> and coded in
                 <a href="https://code.visualstudio.com/"> Visual Studio Code.</a> Built from scratch with
