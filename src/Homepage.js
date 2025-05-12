@@ -136,7 +136,7 @@ const Homepage = () => {
   }
 
   const projectList = ["https://openprocessing.org/user/489802/?o=1&view=sketches", "https://codepen.io/hxnoons"]
-  const Project = ({ index, image, altImg, text }) => {
+  const Project = ({ index, image, altImg, title, text }) => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== projectList[index];
     return (
       <a href={projectList[index]}
@@ -145,7 +145,8 @@ const Homepage = () => {
         onMouseLeave={handleMouseLeave}
       >
         <img src={image} alt={altImg} className={styles.imageStyle} />
-        <p>{text}</p>
+
+        <p><p style={{marginLeft:"0px"}}>{title}</p>{text}</p>
       </a>
     )
   }
@@ -189,13 +190,7 @@ const Homepage = () => {
             <a href="https://www.linkedin.com/in/hannaqadi/">
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
-            <a href="https://codepen.io/hxnoons">
-              <FontAwesomeIcon icon={faCodepen} />
-            </a>
-            <a href="https://www.goodreads.com/user/show/156277793-hanna">
-              <FontAwesomeIcon icon={faGoodreads} />
-            </a>
-            <a href="mailto:hannaabdulalim@gmail.com">
+            <a href="mailto:hannaqadi@gmail.com">
               <FontAwesomeIcon icon={faEnvelope} />
             </a>
           </div>
@@ -273,13 +268,22 @@ const Homepage = () => {
               />
             </div>
             <div className={styles.viewResume}>
-              <a>View full resume </a>
+              <a href={`${process.env.PUBLIC_URL}/ResumeDM2.pdf`}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                target="_blank"
+                rel="noopener noreferrer">View current resume </a>
               <FontAwesomeIcon className={styles.iconArrow} icon={faArrowRight} transform={{ rotate: 315 }} />
             </div>
             {isMobile ? <h3 className={styles.headersMobile}>Projects</h3> : <></>}
             <div ref={projectSection}>
-
               <Project
+                index={1}
+                image={codepenImg}
+                alt="oops"
+                title="Madlit"
+                text="Madlit is a lighthearted word game inspired by Mad Gabs, designed to spark laughter through unexpected storytelling. Players input words based on parts of speech — like nouns, verbs, and adjectives — which are then woven into a pre-written story template. Once complete, the result is a silly, often nonsensical story that surprises and entertains. The project is nearly finished and will be launching soon!"
+              />
+              {/* <Project
                 index={1}
                 image={codepenImg}
                 alt="The front page of the codepen website which includes multiple images of other users work"
@@ -290,7 +294,7 @@ const Homepage = () => {
                 image={openprocessingImg}
                 alt="The front page of the openprocessing website which includes multiple images of other users work"
                 text="Explore my OpenProcessing portfolio, where creativity meets code. Dive into dynamic animations, playful visual experiments, and engaging digital art pieces"
-              />
+              /> */}
             </div>
             <div className={styles.anchorStyle}>
               <p>Loosely designed in
