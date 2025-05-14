@@ -1,13 +1,13 @@
 import Homepage from './Homepage';
-import { BrowserRouter, Route, Routes, } from 'react-router-dom';
+import { HashRouter, Route, Routes, } from 'react-router-dom';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/personal-website">
+    <HashRouter>
     <Routes>
       <Route path="/" element={<Homepage/>} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
   );
 }
 
