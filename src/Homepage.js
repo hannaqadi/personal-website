@@ -250,28 +250,28 @@ const Homepage = () => {
               <Experience
                 index={2}
                 year="2022-2022"
-                role="Jumeeya-Frontend Developer"
+                role="Jumeeya - Frontend Developer"
                 description="Led Android development for a closed beta, ensured cross-platform compatibility, and unified the UI with responsive CSS for diverse devices."
                 skills={["React Native", "TypeScript", "CSS"]}
               />
               <Experience
                 index={3}
                 year="2021-2021"
-                role="Teff-Frontend Developer"
+                role="Teff - Frontend Developer"
                 description="Designed custom React hook-based authentication, led efforts to increase test coverage with Jest, and built features interfacing with internal APIs."
                 skills={["React", "Javascript", "TypeScript", "CSS", "HTML", "Jest"]}
               />
               <Experience
                 index={4}
                 year="2020-2021"
-                role="Specranks-Fullstack Developer"
+                role="Specranks - Fullstack Developer"
                 description="Refactored pages for 70,000+ live product listings using modern React patterns, updated libraries for improved performance, identified potential bugs, and ensured thorough documentation throughout the process."
                 skills={["React", "Javascript", "TypeScript", "CSS", "HTML", "Node.js", "SQL"]}
               />
               <Experience
                 index={4}
                 year="2019-2019"
-                role="Specranks-Database Administrator"
+                role="Specranks - Database Administrator"
                 description="Collaborated on efficient database schema design, optimized structures for better data organization, and reorganized tables for simplified retrieval and reporting."
                 skills={["SQL"]}
               />
