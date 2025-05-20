@@ -135,7 +135,7 @@ const Homepage = () => {
     )
   }
 
-  const projectList = ["https://openprocessing.org/user/489802/?o=1&view=sketches", "https://codepen.io/hxnoons"]
+  const projectList = [""]
   const Project = ({ index, image, altImg, title, text }) => {
     const isDimmed = hoveredIndex !== null && hoveredIndex !== projectList[index];
     return (
