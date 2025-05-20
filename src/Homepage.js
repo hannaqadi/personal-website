@@ -212,7 +212,7 @@ const Homepage = () => {
                 direction="left"
                 scrollamount="3"
                 scrolldelay="40"
-                title="yes the marquee is depracated and is an accesibility issue, but i think it looks cool :')"
+                title="yes the marquee is deprecated and is an accesibility issue, but i think it looks cool :')"
                 className={styles.marquee}
                 onMouseOver={(e) => e.target.stop()}
                 onMouseOut={(e) => e.target.start()}
